@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>HPO — COD Player Profile Tool</title>
+<meta name="format-detection" content="telephone=no"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -233,7 +234,7 @@ body{background:var(--bg);color:var(--light);font-family:'Inter',sans-serif;font
   <div class="section-label">Player Details</div>
   <div class="input-group">
     <div class="input-label">Player Name / Number</div>
-    <input class="input-field" id="playerName" type="text" placeholder="e.g. Player 7"/>
+    <input class="input-field" id="playerName" type="text" autocomplete="off" placeholder="e.g. Player 7"/>
   </div>
 
   <!-- PURE 505 -->
@@ -249,9 +250,9 @@ body{background:var(--bg);color:var(--light);font-family:'Inter',sans-serif;font
           <div class="rep-header-cell">Time (s)</div>
           <div class="rep-header-cell" style="grid-column:span 2">—</div>
         </div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">1</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-L-1"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">2</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-L-2"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">3</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-L-3"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">1</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-L-1"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">2</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-L-2"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">3</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-L-3"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
       </div>
     </div>
     <div>
@@ -262,9 +263,9 @@ body{background:var(--bg);color:var(--light);font-family:'Inter',sans-serif;font
           <div class="rep-header-cell">Time (s)</div>
           <div class="rep-header-cell" style="grid-column:span 2">—</div>
         </div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">1</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-R-1"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">2</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-R-2"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
-        <div class="rep-row"><div class="rep-cell"><div class="rep-num">3</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" id="pure-R-3"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">1</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-R-1"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">2</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-R-2"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
+        <div class="rep-row"><div class="rep-cell"><div class="rep-num">3</div></div><div class="rep-cell"><input class="rep-input" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="pure-R-3"/></div><div class="rep-cell" style="grid-column:span 2;background:var(--card);font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase">Pure speed</div></div>
       </div>
     </div>
   </div>
@@ -476,7 +477,7 @@ function buildReactiveReps(){
       <div class="rep-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border)">
         <div class="rep-cell" style="flex-direction:column;align-items:flex-start;gap:4px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:4px">Time (s)</div>
-          <input class="rep-input input-field" type="number" step="0.01" min="0" placeholder="0.00" id="react-time-${i}" style="padding:6px 10px;font-size:.9rem"/>
+          <input class="rep-input input-field" type="number" step="0.01" min="0" placeholder="0.00" autocomplete="off" id="react-time-${i}" style="padding:6px 10px;font-size:.9rem"/>
         </div>
         <div class="rep-cell" style="flex-direction:column;align-items:flex-start;gap:4px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:4px">Direction Called</div>
