@@ -3,198 +3,237 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Human Performance Operations</title>
+<title>Human Performance Operations — Athletic Development</title>
+<meta property="og:title" content="Human Performance Operations"/>
+<meta property="og:description" content="Physical development infrastructure for athletes at every stage of the pathway."/>
+<meta property="og:url" content="https://greengerald9.github.io/human-performance-operations"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0f1117;--surface:#161b26;--card:#1c2233;
-  --border:#252d3d;--border-light:#2e3a50;
-  --mist:#4a5568;--ash:#718096;--silver:#a0aec0;
-  --light:#cbd5e0;--white:#f7fafc;
-  --gold:#d4a843;--gold-hi:#f0c060;--gold-lo:#7a5c1e;
-  --red:#e53e3e;--red-soft:rgba(229,62,62,0.08);
-  --green:#38a169;--green-soft:rgba(56,161,105,0.08);
-  --amber:#dd6b20;
+  --bg:#fafaf8;--surface:#f2f2ee;--card:#eceae4;
+  --border:#e0ddd6;--border-light:#d4d0c8;
+  --mist:#8a8a7a;--ash:#6a6a5a;--silver:#4a4a3a;
+  --light:#2a2a1e;--white:#1a1a14;
+  --dark-bg:#0d1019;--dark-surface:#151c2b;--dark-card:#1a2235;
+  --dark-border:#253048;
+  --gold:#c8981e;--gold-hi:#e0aa2a;--gold-lo:#8a6010;--gold-warm:rgba(200,152,30,.1);
+  --gold-dark:#e8b84b;
+  --red:#c84040;--red-soft:rgba(200,64,64,0.08);
+  --green:#2a9a50;--green-soft:rgba(42,154,80,0.08);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--light);font-family:'Inter',sans-serif;font-weight:300;font-size:16px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-#cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s}
-#cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(212,168,67,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;background:rgba(15,17,23,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.n-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.14em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:8px}
-.n-dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+
+/* NAV — stays dark */
+nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;background:rgba(13,16,25,.97);backdrop-filter:blur(24px);border-bottom:1px solid rgba(232,184,75,.12)}
+.n-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.14em;text-transform:uppercase;color:#fef9ef;display:flex;align-items:center;gap:8px;text-decoration:none}
+.n-dot{width:6px;height:6px;background:var(--gold-dark);border-radius:50%;box-shadow:0 0 8px rgba(232,184,75,.4)}
 .n-nav{display:flex;align-items:center;gap:4px;list-style:none}
 .n-item{position:relative}
-.n-item>a,.n-item>button{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);text-decoration:none;background:none;border:none;cursor:pointer;padding:8px 14px;transition:all .2s;display:flex;align-items:center;gap:6px}
-.n-item>a:hover,.n-item>button:hover{color:var(--white);background:var(--card)}
+.n-item>a,.n-item>button{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:#8a9ab8;text-decoration:none;background:none;border:none;cursor:pointer;padding:8px 14px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.n-item>a:hover,.n-item>button:hover{color:#fef9ef;background:#1a2235}
 .n-arrow{font-size:.5rem;transition:transform .2s}
 .n-item:hover .n-arrow{transform:rotate(180deg)}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:var(--surface);border:1px solid var(--border);min-width:260px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .2s;z-index:100}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:#151c2b;border:1px solid #253048;min-width:260px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .2s;z-index:100;box-shadow:0 16px 48px rgba(0,0,0,.4)}
 .n-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
-.dropdown a{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);text-decoration:none;padding:12px 20px;border-bottom:1px solid var(--border);transition:all .2s}
+.dropdown-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark);padding:10px 20px 6px;background:#1a2235;border-bottom:1px solid #253048}
+.dropdown a{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:#8a9ab8;text-decoration:none;padding:12px 20px;border-bottom:1px solid #253048;transition:all .2s}
 .dropdown a:last-child{border:none}
-.dropdown a:hover{color:var(--gold);background:var(--card);padding-left:24px}
-.dropdown-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:10px 20px 6px;background:var(--card);border-bottom:1px solid var(--border)}
-.n-cta{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:10px 22px;text-decoration:none;transition:all .25s;font-weight:500}
-.n-cta:hover{background:var(--gold-hi)}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 88px;position:relative;overflow:hidden;background:var(--bg)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.035) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 65% 55% at 65% 45%,black,transparent);pointer-events:none}
-.hero-orb{position:absolute;top:-18%;right:-8%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.055) 0%,transparent 65%);pointer-events:none}
-.banner{position:absolute;top:0;left:0;right:0;height:64px;background:var(--surface);border-bottom:1px solid rgba(212,168,67,.1);display:flex;align-items:center;justify-content:center;gap:20px;z-index:2}
-.banner-name{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--silver)}
+.dropdown a:hover{color:var(--gold-dark);background:#1a2235;padding-left:24px}
+.n-audit{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);text-decoration:none;padding:8px 18px;border:1px solid rgba(232,184,75,.35);transition:all .25s;margin-left:8px}
+.n-audit:hover{background:var(--gold-dark);color:#0d1019}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:401}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--gold-dark);transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(13,16,25,.98);z-index:399;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-section-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dark);padding:16px 0 8px;border-bottom:1px solid #253048;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.mobile-section-label .arr{font-size:.5rem;transition:transform .2s;color:#4a5872}
+.mobile-section-label.open .arr{transform:rotate(180deg)}
+.mobile-sub{display:none;flex-direction:column;padding-bottom:8px}
+.mobile-sub.open{display:flex}
+.mobile-sub a{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#8a9ab8;text-decoration:none;padding:10px 16px;border-left:1px solid #253048;transition:all .2s;display:block;line-height:1.6}
+.mobile-sub a:active{color:var(--gold-dark);border-left-color:var(--gold-dark)}
+.mobile-direct{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:#8a9ab8;text-decoration:none;padding:16px 0;border-bottom:1px solid #253048;display:block}
+.mobile-audit{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);padding:16px;text-align:center;text-decoration:none;margin-top:16px;border:1px solid rgba(232,184,75,.3);display:block}
+.mobile-cta-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#0d1019;background:var(--gold-dark);padding:16px;text-align:center;text-decoration:none;margin-top:8px;font-weight:500;display:block}
+
+/* HERO — light background */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 96px;position:relative;overflow:hidden;background:var(--bg)}
+.hero-rule{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,rgba(200,152,30,.3) 60%,transparent 100%);z-index:2}
+.banner{position:absolute;top:0;left:0;right:0;height:64px;background:rgba(250,250,248,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:20px;z-index:2}
+.banner-name{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ash)}
 .banner-name em{color:var(--gold);font-style:normal}
 .banner-sep{width:1px;height:14px;background:var(--border-light)}
 .banner-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
-.hero-inner{position:relative;z-index:1;max-width:1060px;width:100%;display:grid;grid-template-columns:1fr 320px;gap:72px;align-items:end}
+.hero-inner{position:relative;z-index:1;max-width:1060px;width:100%;display:grid;grid-template-columns:1fr 300px;gap:72px;align-items:end}
 .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:24px;opacity:0;animation:up .7s .1s forwards}
 .hero-eyebrow:before{content:'';width:32px;height:1px;background:var(--gold)}
-.hero-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.2rem,7.5vw,7rem);line-height:.88;letter-spacing:.025em;color:var(--white);opacity:0;animation:up .9s .25s forwards}
-.hero-h .serif{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold)}
-.hero-cost{margin-top:20px;font-size:1.05rem;color:var(--silver);max-width:520px;line-height:1.7;opacity:0;animation:up .8s .38s forwards}
-.hero-sub{margin-top:12px;font-size:.9rem;color:var(--ash);max-width:500px;line-height:1.75;opacity:0;animation:up .8s .46s forwards}
-.hero-cta{margin-top:36px;display:flex;gap:14px;opacity:0;animation:up .7s .54s forwards}
-.btn-g{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:var(--bg);padding:14px 30px;text-decoration:none;font-weight:500;transition:all .25s;display:inline-block}
+.hero-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.2rem,7.5vw,7.2rem);line-height:.86;letter-spacing:.025em;color:var(--white);opacity:0;animation:up .9s .25s forwards}
+.hero-h .serif{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);display:block}
+.hero-cost{margin-top:22px;font-size:1.12rem;color:var(--silver);max-width:540px;line-height:1.72;opacity:0;animation:up .8s .38s forwards;font-style:italic;font-family:'Instrument Serif',serif}
+.hero-sub{margin-top:14px;font-size:.92rem;color:var(--mist);max-width:500px;line-height:1.8;opacity:0;animation:up .8s .46s forwards}
+.hero-cta{margin-top:40px;display:flex;gap:14px;opacity:0;animation:up .7s .54s forwards}
+.btn-g{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:#fafaf8;padding:15px 32px;text-decoration:none;font-weight:500;transition:all .25s;display:inline-block}
 .btn-g:hover{background:var(--gold-hi)}
-.btn-o{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:var(--light);padding:13px 30px;border:1px solid var(--border-light);text-decoration:none;transition:all .25s;display:inline-block}
+.btn-o{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:var(--light);padding:14px 32px;border:1px solid var(--border-light);text-decoration:none;transition:all .25s;display:inline-block}
 .btn-o:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO SIGNAL — dark card on light page */
 .hero-signal{opacity:0;animation:up .8s .65s forwards;align-self:end}
-.sig-hdr{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);display:flex;align-items:center;gap:7px;margin-bottom:18px}
-.live-pip{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 7px var(--green);animation:pip 2s infinite;flex-shrink:0}
+.sig-card{background:var(--dark-bg);padding:28px 24px}
+.sig-hdr{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#8a9ab8;display:flex;align-items:center;gap:7px;margin-bottom:18px}
+.live-pip{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pip 2s infinite;flex-shrink:0}
 @keyframes pip{0%,100%{opacity:1}50%{opacity:.3}}
-.sig-list{display:flex;flex-direction:column;gap:14px}
-.sig-env{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mist);margin-bottom:3px}
-.sig-row{display:flex;align-items:baseline;gap:7px;margin-bottom:3px}
-.sig-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);line-height:1}
-.sig-unit{font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--mist)}
-.sig-bar{height:1px;background:var(--border);width:100%;position:relative;margin-bottom:3px}
-.sig-fill{position:absolute;left:0;top:0;bottom:0;background:var(--gold);width:0;transition:width 1.4s ease}
+.sig-list{display:flex;flex-direction:column;gap:16px}
+.sig-env{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:#4a5872;margin-bottom:4px}
+.sig-row{display:flex;align-items:baseline;gap:7px;margin-bottom:4px}
+.sig-num{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:#fef9ef;line-height:1}
+.sig-unit{font-family:'JetBrains Mono',monospace;font-size:.54rem;color:#4a5872}
+.sig-bar{height:1px;background:#253048;width:100%;position:relative;margin-bottom:3px}
+.sig-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#8a6010,var(--gold-dark));width:0;transition:width 1.6s ease}
 .sig-note{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase}
-.note-warn{color:var(--red)}.note-ok{color:var(--green)}
-.cases{background:var(--surface);border-top:1px solid rgba(212,168,67,.12);border-bottom:1px solid var(--border);padding:52px}
+.note-warn{color:#e05252}.note-ok{color:var(--green)}
+
+/* CASES — light background */
+.cases{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 52px}
 .cases-inner{max-width:1060px;margin:0 auto}
-.cases-eye{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:32px}
+.cases-eye{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:36px}
 .cases-eye:before{content:'';width:22px;height:1px;background:var(--gold)}
-.cases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
-.case-item{background:var(--surface);padding:28px 24px;transition:background .3s;position:relative;overflow:hidden}
-.case-item:hover{background:var(--card)}
-.case-item:first-child{border-left:2px solid var(--gold)}
-.case-week{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:12px}
-.case-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:4px}
-.case-num span{color:var(--gold);font-size:1.3rem}
-.case-num.red{color:var(--red)}.case-num.green{color:var(--green)}
-.case-desc{font-size:.85rem;color:var(--silver);line-height:1.6;margin-bottom:10px}
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.case-item{background:var(--bg);padding:40px 32px;transition:background .3s}
+.case-item:hover{background:var(--surface)}
+.case-item:first-child{border-left:3px solid var(--gold)}
+.case-item:last-child{border-left:3px solid var(--green)}
+.case-week{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:16px}
+.case-num{font-family:'Bebas Neue',sans-serif;font-size:3.4rem;color:var(--white);line-height:1;margin-bottom:8px}
+.case-num span{color:var(--gold);font-size:1.5rem}
+.case-num.green{color:var(--green)}
+.case-desc{font-size:.92rem;color:var(--ash);line-height:1.72;margin-bottom:16px}
 .case-flag{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase}
-.case-flag.warn{color:var(--red)}.case-flag.ok{color:var(--green)}
-.wrap{padding:96px 52px;max-width:1060px;margin:0 auto}
+.case-flag.ok{color:var(--green)}
+
+/* SHARED */
+.wrap{padding:100px 52px;max-width:1060px;margin:0 auto}
 .eye{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .eye:before{content:'';width:22px;height:1px;background:var(--gold)}
-.disp{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.2vw,3.8rem);line-height:.92;letter-spacing:.03em;color:var(--white);margin-bottom:44px}
+.disp{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.2vw,3.9rem);line-height:.92;letter-spacing:.03em;color:var(--white);margin-bottom:48px}
 .disp em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold)}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
 .reveal.on{opacity:1;transform:translateY(0)}
+
+/* PROBLEM — light */
 .prob-bg{background:var(--bg);border-top:1px solid var(--border)}
 .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
 .p-card{background:var(--bg);padding:52px 44px;position:relative;overflow:hidden;transition:background .35s}
 .p-card:hover{background:var(--surface)}
 .p-card:after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s}
 .p-card:hover:after{transform:scaleX(1)}
-.p-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(212,168,67,.04);position:absolute;top:16px;right:20px;line-height:1}
+.p-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(200,152,30,.06);position:absolute;top:16px;right:20px;line-height:1}
 .p-sector{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.p-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;color:var(--white);margin-bottom:14px;line-height:1.05}
-.p-card p{font-size:.95rem;color:var(--silver);line-height:1.78}
-.p-flag{margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:8px}
+.p-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;color:var(--white);margin-bottom:16px;line-height:1.05}
+.p-card p{font-size:.95rem;color:var(--ash);line-height:1.82}
+.p-flag{margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:8px}
 .p-flag:before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;flex-shrink:0}
-.data-bg{background:var(--surface);border-top:1px solid var(--border)}
-.tabs{display:flex;gap:1px;background:var(--border);margin-bottom:1px}
-.tab{flex:1;padding:15px 22px;font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;background:var(--surface);color:var(--mist);border:none;cursor:pointer;transition:all .25s;text-align:left}
-.tab.on{background:var(--card);color:var(--gold)}
-.tab:hover:not(.on){background:var(--card);color:var(--light)}
+
+/* DATA — dark islands on light page */
+.data-bg{background:var(--dark-bg);border-top:1px solid var(--dark-border)}
+.data-bg .wrap{color:#d8e0f0}
+.data-bg .eye{color:var(--gold-dark)}
+.data-bg .eye:before{background:var(--gold-dark)}
+.data-bg .disp{color:#fef9ef}
+.data-bg .disp em{color:var(--gold-dark)}
+.tabs{display:flex;gap:1px;background:var(--dark-border);margin-bottom:1px}
+.tab{flex:1;padding:15px 22px;font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;background:var(--dark-surface);color:#4a5872;border:none;cursor:pointer;transition:all .25s;text-align:left}
+.tab.on{background:var(--dark-card);color:var(--gold-dark);border-bottom:2px solid var(--gold-dark)}
+.tab:hover:not(.on){background:var(--dark-card);color:#d8e0f0}
 .panel{display:none}
-.panel.on{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
-.p-chart{background:var(--card);padding:40px}
-.p-insight{background:var(--surface);padding:40px}
-.ct{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:24px}
+.panel.on{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--dark-border)}
+.p-chart{background:var(--dark-card);padding:40px}
+.p-insight{background:var(--dark-surface);padding:40px}
+.ct{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#7a8ba8;margin-bottom:24px}
 .bars{display:flex;flex-direction:column;gap:10px}
-.sublabel{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mist);margin:14px 0 8px}
+.sublabel{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:#4a5872;margin:14px 0 8px}
 .brow{display:flex;align-items:center;gap:10px}
-.bl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--ash);width:52px;text-align:right;flex-shrink:0}
-.bt{flex:1;height:24px;background:var(--border);position:relative;overflow:hidden}
-.bf{height:100%;background:linear-gradient(90deg,var(--gold-lo),var(--gold));width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
-.bf.w{background:linear-gradient(90deg,#7a1a0a,var(--red))}
-.bf.g{background:linear-gradient(90deg,#0f3020,var(--green))}
-.bv{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:rgba(255,255,255,.75);white-space:nowrap}
-.i-big{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);line-height:1;margin-bottom:3px}
-.i-big span{font-size:1.2rem;color:var(--gold)}
-.i-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ash);margin-bottom:20px}
-.fbox{background:var(--red-soft);border-left:2px solid var(--red);padding:16px 20px;margin-bottom:12px}
-.fbox .fl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.11em;text-transform:uppercase;color:var(--red);margin-bottom:5px}
-.fbox p,.gbox p{font-size:.9rem;color:var(--silver);line-height:1.65}
-.gbox{background:var(--green-soft);border-left:2px solid var(--green);padding:16px 20px}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#7a8ba8;width:52px;text-align:right;flex-shrink:0}
+.bt{flex:1;height:24px;background:var(--dark-border);position:relative;overflow:hidden}
+.bf{height:100%;background:linear-gradient(90deg,var(--gold-lo),var(--gold-dark));width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+.bf.w{background:linear-gradient(90deg,#7a1a0a,#e05252)}
+.bf.g{background:linear-gradient(90deg,#0a2818,var(--green))}
+.bv{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:rgba(255,255,255,.8);white-space:nowrap}
+.i-big{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#fef9ef;line-height:1;margin-bottom:3px}
+.i-big span{font-size:1.2rem;color:var(--gold-dark)}
+.i-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:#7a8ba8;margin-bottom:22px}
+.fbox{background:rgba(224,82,82,.08);border-left:2px solid #e05252;padding:16px 20px;margin-bottom:12px}
+.fbox .fl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.11em;text-transform:uppercase;color:#e05252;margin-bottom:5px}
+.fbox p,.gbox p{font-size:.9rem;color:#b0bdd4;line-height:1.65}
+.gbox{background:rgba(42,154,80,.08);border-left:2px solid var(--green);padding:16px 20px}
 .gbox .gl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.11em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
-.svc-bg{background:var(--bg);border-top:1px solid var(--border)}
+
+/* SERVICES — light */
+.svc-bg{background:var(--surface);border-top:1px solid var(--border)}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
 .svc-card{background:var(--bg);padding:44px 36px;position:relative;transition:background .3s}
 .svc-card:hover{background:var(--surface)}
-.svc-card.feat{background:var(--surface)}
-.svc-card.feat:before{content:'RECOMMENDED';position:absolute;top:0;right:0;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.14em;background:var(--gold);color:var(--bg);padding:6px 12px;font-weight:500}
-.svc-tier{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
-.svc-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;color:var(--white);margin-bottom:8px;line-height:1}
-.svc-desc{font-size:.95rem;color:var(--silver);margin-bottom:24px;line-height:1.75}
+.svc-card.feat{background:var(--surface);border-top:3px solid var(--gold)}
+.svc-card.feat:before{content:'RECOMMENDED';position:absolute;top:0;right:0;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.14em;background:var(--gold);color:#fafaf8;padding:6px 14px;font-weight:500}
+.svc-tier{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.svc-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;color:var(--white);margin-bottom:10px;line-height:1}
+.svc-desc{font-size:.95rem;color:var(--ash);margin-bottom:26px;line-height:1.75}
 .svc-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.svc-list li{font-size:.92rem;color:var(--light);display:flex;gap:10px;align-items:flex-start}
+.svc-list li{font-size:.92rem;color:var(--silver);display:flex;gap:10px;align-items:flex-start}
 .svc-list li:before{content:'›';color:var(--gold);flex-shrink:0;line-height:1.4}
-.about-bg{background:var(--surface);border-top:1px solid var(--border)}
-.about-layout{display:grid;grid-template-columns:300px 1fr;gap:72px;align-items:start}
-.photo-frame{width:100%;aspect-ratio:3/4;background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.pc{position:absolute;width:16px;height:16px;border-color:var(--gold-lo);border-style:solid}
+
+/* ABOUT — light */
+.about-bg{background:var(--bg);border-top:1px solid var(--border)}
+.about-layout{display:grid;grid-template-columns:280px 1fr;gap:72px;align-items:start}
+.photo-frame{width:100%;aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pc{position:absolute;width:16px;height:16px;border-color:rgba(200,152,30,.3);border-style:solid}
 .pc.tl{top:12px;left:12px;border-width:1px 0 0 1px}
 .pc.tr{top:12px;right:12px;border-width:1px 1px 0 0}
 .pc.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
 .pc.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
-.photo-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);text-align:center;line-height:2}
-.about-intro{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.35rem;color:var(--white);line-height:1.55;margin-bottom:26px}
-.about-body{font-size:.95rem;color:var(--silver);line-height:1.85;margin-bottom:32px}
+.photo-lbl{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);text-align:center;line-height:2.4}
+.photo-sub{font-family:'JetBrains Mono',monospace;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--border-light);margin-top:6px;text-align:center}
+.about-intro{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.35rem;color:var(--white);line-height:1.58;margin-bottom:26px}
+.about-body{font-size:.95rem;color:var(--ash);line-height:1.88;margin-bottom:34px}
 .cred-stack{display:flex;flex-direction:column;gap:1px}
-.cred-row{background:var(--card);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;border-left:2px solid transparent;transition:all .25s}
-.cred-row:hover{border-left-color:var(--gold);background:var(--surface)}
+.cred-row{background:var(--surface);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;border-left:2px solid transparent;transition:all .25s}
+.cred-row:hover{border-left-color:var(--gold);background:var(--card)}
 .cred-name{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;color:var(--white)}
-.cred-sub{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--ash)}
-.cta-bg{background:var(--bg);position:relative}
-.cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 90% at 50% 50%,rgba(212,168,67,.045),transparent)}
-.cta-inner{position:relative;z-index:1;padding:120px 52px;text-align:center;border-top:1px solid rgba(212,168,67,.1);border-bottom:1px solid rgba(212,168,67,.1)}
-.cta-eye{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-.cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:.92;letter-spacing:.02em;color:var(--white);margin-bottom:18px}
-.cta-h em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);display:block}
-.cta-sub{font-size:1rem;color:var(--silver);max-width:380px;margin:0 auto 40px;line-height:1.8}
-.cta-acts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-footer{background:var(--surface);border-top:1px solid var(--border);padding:32px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);display:flex;align-items:center;gap:7px}
-.f-dot{width:5px;height:5px;background:var(--gold);border-radius:50%}
-.f-links{display:flex;gap:20px}
-.f-links a{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ash);text-decoration:none;transition:color .2s}
-.f-links a:hover{color:var(--gold)}
-.f-note{width:100%;font-family:'JetBrains Mono',monospace;font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;color:var(--border-light);padding-top:16px;margin-top:4px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.cred-sub{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--mist)}
 
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:401}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all .3s}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(15,17,23,.98);z-index:399;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
-.mobile-menu.open{display:flex}
-.mobile-section-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:16px 0 8px;border-bottom:1px solid var(--border);margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.mobile-section-label .arr{font-size:.5rem;transition:transform .2s;color:var(--mist)}
-.mobile-section-label.open .arr{transform:rotate(180deg)}
-.mobile-sub{display:none;flex-direction:column;padding-bottom:8px}
-.mobile-sub.open{display:flex}
-.mobile-sub a{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);text-decoration:none;padding:10px 16px;border-left:1px solid var(--border);transition:all .2s;display:block}
-.mobile-sub a:active{color:var(--gold);border-left-color:var(--gold)}
-.mobile-direct{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border);display:block}
-.mobile-cta-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:16px;text-align:center;text-decoration:none;margin-top:24px;font-weight:500;display:block}
+/* CTA — dark island */
+.cta-bg{background:var(--dark-bg);position:relative;overflow:hidden}
+.cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(232,184,75,.06),transparent)}
+.cta-inner{position:relative;z-index:1;padding:120px 52px;text-align:center;border-top:1px solid rgba(232,184,75,.12);border-bottom:1px solid rgba(232,184,75,.12)}
+.cta-eye{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:20px}
+.cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:.92;letter-spacing:.02em;color:#fef9ef;margin-bottom:18px}
+.cta-h em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold-dark);display:block}
+.cta-sub{font-size:1rem;color:#b0bdd4;max-width:400px;margin:0 auto 44px;line-height:1.82}
+.cta-acts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.cta-btn-g{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:var(--gold-dark);color:#0d1019;padding:15px 32px;text-decoration:none;font-weight:500;transition:all .25s;display:inline-block}
+.cta-btn-g:hover{background:#f5cc70}
+.cta-btn-o{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:#d8e0f0;padding:14px 32px;border:1px solid #253048;text-decoration:none;transition:all .25s;display:inline-block}
+.cta-btn-o:hover{border-color:var(--gold-dark);color:var(--gold-dark)}
+
+/* FOOTER — dark */
+footer{background:var(--dark-surface);border-top:1px solid var(--dark-border);padding:32px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:#fef9ef;display:flex;align-items:center;gap:8px}
+.f-dot{width:5px;height:5px;background:var(--gold-dark);border-radius:50%}
+.f-links{display:flex;gap:20px;flex-wrap:wrap}
+.f-links a{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:#8a9ab8;text-decoration:none;transition:color .2s}
+.f-links a:hover{color:var(--gold-dark)}
+.f-note{width:100%;font-family:'JetBrains Mono',monospace;font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;color:#253048;padding-top:16px;margin-top:4px;border-top:1px solid var(--dark-border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 @keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
 @media(max-width:900px){
-  nav{padding:0 20px}.n-nav{display:none}.hamburger{display:flex}
+  nav{padding:0 20px}.n-nav{display:none}.n-audit{display:none}.hamburger{display:flex}
   .hero{padding:0 24px 56px;justify-content:flex-start}
   .hero-inner{grid-template-columns:1fr;padding-top:148px}.hero-signal{display:none}
   .hero-h{font-size:clamp(2.8rem,10vw,4.5rem)}
@@ -202,33 +241,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
   .prob-grid,.svc-grid{grid-template-columns:1fr}
   .panel.on{grid-template-columns:1fr}
   .about-layout{grid-template-columns:1fr}
-  .cases-grid{grid-template-columns:1fr 1fr}
+  .cases-grid{grid-template-columns:1fr}
   .cases{padding:40px 24px}
-  footer{flex-direction:column;align-items:flex-start}
+  footer{flex-direction:column;align-items:flex-start;padding:24px}
   .cta-inner{padding:72px 24px}
   .banner-tag{display:none}
 }
 </style>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur-r"></div>
+<div id="cur" style="display:none"></div>
+<div id="cur-r" style="display:none"></div>
 
-<!-- NAV -->
 <nav>
-  <div class="n-logo"><div class="n-dot"></div>HPO</div>
+  <a href="#" class="n-logo"><div class="n-dot"></div>HPO</a>
   <ul class="n-nav">
-    <li class="n-item">
-      <button>High Performance Operations <span class="n-arrow">▾</span></button>
-      <div class="dropdown">
-        <div class="dropdown-label">Operations</div>
-        <a href="#problem">Industrial</a>
-        <a href="#problem">Construction</a>
-        <a href="#problem">Private Security</a>
-        <a href="#problem">Safari &amp; Field Operations</a>
-        <a href="#problem">Events &amp; Venue Operations</a>
-      </div>
-    </li>
     <li class="n-item">
       <button>Athletic Development <span class="n-arrow">▾</span></button>
       <div class="dropdown">
@@ -243,8 +270,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
     <li class="n-item"><a href="#data">Case Data</a></li>
     <li class="n-item"><a href="#services">Services</a></li>
     <li class="n-item"><a href="#about">About</a></li>
+    <a href="mailto:contact@humanperformanceoperations.com" class="n-audit">Book a Development Audit</a>
   </ul>
-  <a href="mailto:contact@humanperformanceoperations.com" class="n-cta">Book Audit</a>
   <button class="hamburger" onclick="toggleMenu()" id="hamburger">
     <span></span><span></span><span></span>
   </button>
@@ -252,20 +279,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-section-label" onclick="toggleSub('sub1',this)">
-    High Performance Operations <span class="arr">▾</span>
-  </div>
+  <div class="mobile-section-label" onclick="toggleSub('sub1',this)">Athletic Development <span class="arr">▾</span></div>
   <div class="mobile-sub" id="sub1">
-    <a href="#problem" onclick="closeMenu()">Industrial</a>
-    <a href="#problem" onclick="closeMenu()">Construction</a>
-    <a href="#problem" onclick="closeMenu()">Private Security</a>
-    <a href="#problem" onclick="closeMenu()">Safari &amp; Field Operations</a>
-    <a href="#problem" onclick="closeMenu()">Events &amp; Venue Operations</a>
-  </div>
-  <div class="mobile-section-label" onclick="toggleSub('sub2',this)">
-    Athletic Development <span class="arr">▾</span>
-  </div>
-  <div class="mobile-sub" id="sub2">
     <a href="#problem" onclick="closeMenu()">Foundation — Elite High Schools</a>
     <a href="#problem" onclick="closeMenu()">Development — Performance Academies</a>
     <a href="#problem" onclick="closeMenu()">Advancement — Ambitious Clubs</a>
@@ -275,86 +290,76 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
   <a href="#data" class="mobile-direct" onclick="closeMenu()">Case Data</a>
   <a href="#services" class="mobile-direct" onclick="closeMenu()">Services</a>
   <a href="#about" class="mobile-direct" onclick="closeMenu()">About</a>
-  <a href="mailto:contact@humanperformanceoperations.com" class="mobile-cta-btn">Book Audit</a>
+  <a href="mailto:contact@humanperformanceoperations.com" class="mobile-audit" onclick="closeMenu()">Book a Development Audit</a>
+  <a href="hpo-cod-tool.html" class="mobile-cta-btn" onclick="closeMenu()">Free COD Tool</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-orb"></div>
+  <div class="hero-rule"></div>
   <div class="banner">
     <span class="banner-name">Human Performance <em>Operations</em></span>
     <div class="banner-sep"></div>
-    <span class="banner-tag">Athletic Development · High Performance Operations</span>
+    <span class="banner-tag">Athletic Development · Individual Pathways</span>
   </div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">High Performance Environments</div>
+      <div class="hero-eyebrow">Where Development Begins</div>
       <h1 class="hero-h">
-        You Have Ambition.<br/>
-        <span class="serif">You Don't Have<br/>a System.</span>
+        Training Is<br/>Everywhere.<br/>
+        <span class="serif">Development<br/>Is Rare.</span>
       </h1>
-      <p class="hero-cost">Every day without one is performance you can't measure, develop, or prove.</p>
-      <p class="hero-sub">Physical readiness and individual development infrastructure for high performance environments — where compliance ends and real performance begins.</p>
+      <p class="hero-cost">Because talent without development is just potential.</p>
+      <p class="hero-sub">Physical development infrastructure for athletes at every stage of the pathway.</p>
       <div class="hero-cta">
-        <a href="#problem" class="btn-g">See the Gap</a>
+        <a href="#problem" class="btn-g">See the Difference</a>
         <a href="#data" class="btn-o">Live Case Data</a>
       </div>
     </div>
     <div class="hero-signal">
-      <div class="sig-hdr"><span class="live-pip"></span>Active Case Data</div>
-      <div class="sig-list">
-        <div>
-          <div class="sig-env">In-Season Competitive Athlete</div>
-          <div class="sig-row"><span class="sig-num">7</span><span class="sig-unit">/10 pain — Wk 3</span></div>
-          <div class="sig-bar"><div class="sig-fill" data-w="70"></div></div>
-          <div class="sig-note note-warn">⚠ Load spike flagged before incident</div>
-        </div>
-        <div>
-          <div class="sig-env">MSK Reconditioning Block</div>
-          <div class="sig-row"><span class="sig-num">+50</span><span class="sig-unit">% movement quality</span></div>
-          <div class="sig-bar"><div class="sig-fill" data-w="50"></div></div>
-          <div class="sig-note note-ok">↑ S1 to S5 progression confirmed</div>
-        </div>
-        <div>
-          <div class="sig-env">Industrial Operation</div>
-          <div class="sig-row"><span class="sig-num">D3</span><span class="sig-unit"> flag</span></div>
-          <div class="sig-bar"><div class="sig-fill" data-w="40"></div></div>
-          <div class="sig-note note-warn">⚠ Post-load crash caught. Recovered D4</div>
+      <div class="sig-card">
+        <div class="sig-hdr"><span class="live-pip"></span>Active Development Cases</div>
+        <div class="sig-list">
+          <div>
+            <div class="sig-env">In-Season Competitive Athlete</div>
+            <div class="sig-row"><span class="sig-num">+20</span><span class="sig-unit">min game time</span></div>
+            <div class="sig-bar"><div class="sig-fill" data-w="60"></div></div>
+            <div class="sig-note note-ok">↑ 3 week development block</div>
+          </div>
+          <div>
+            <div class="sig-env">MSK Reconditioning</div>
+            <div class="sig-row"><span class="sig-num">+50</span><span class="sig-unit">% movement quality</span></div>
+            <div class="sig-bar"><div class="sig-fill" data-w="50"></div></div>
+            <div class="sig-note note-ok">↑ S1 to S5 confirmed</div>
+          </div>
+          <div>
+            <div class="sig-env">COD Player Profile</div>
+            <div class="sig-row"><span class="sig-num">6</span><span class="sig-unit">% asymmetry</span></div>
+            <div class="sig-bar"><div class="sig-fill" data-w="30"></div></div>
+            <div class="sig-note note-ok">✓ Sharp Legs · Sharp Mind</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LIVE CASE STRIP -->
+<!-- CASE STRIP -->
 <div class="cases reveal">
   <div class="cases-inner">
-    <div class="cases-eye">Live Case Data — Active Development Tracking</div>
+    <div class="cases-eye">Active Development Cases</div>
     <div class="cases-grid">
       <div class="case-item">
-        <div class="case-week">In-Season · Competitive Athlete · 3 Weeks</div>
-        <div class="case-num red">7<span>/10</span></div>
-        <div class="case-desc">Physical load progression flagged Week 3. Energy declining under sustained high output. Game time increased +20 minutes across the block while physical accumulation went unmanaged.</div>
-        <div class="case-flag warn">⚠ Physical progression flagged before incident</div>
+        <div class="case-week">In-Season · Competitive Athlete · 3 Week Block</div>
+        <div class="case-num green">+20<span> min</span></div>
+        <div class="case-desc">Game time progressed from 10 minutes to 25 minutes across a three week block. Energy declining under sustained load. Pain spike flagged and managed before it became a setback. Physical development arc tracked and proven — not assumed.</div>
+        <div class="case-flag ok">↑ Development arc visible through data</div>
       </div>
       <div class="case-item">
         <div class="case-week">MSK Reconditioning · 5 Sessions</div>
         <div class="case-num green">+50<span>%</span></div>
-        <div class="case-desc">Physical quality improved from baseline to target across five sessions. Soreness spike at Session 2 — tracked, managed, and recovered without setback. Progression arc confirmed.</div>
-        <div class="case-flag ok">↑ Development arc confirmed through data</div>
-      </div>
-      <div class="case-item">
-        <div class="case-week">Industrial Operation · 5 Days</div>
-        <div class="case-num red">D3<span> flag</span></div>
-        <div class="case-desc">Physical output dropped significantly following a high-demand shift on Day 3. Flagged immediately. Adjusted. Full recovery by Day 4. That window only exists with a development framework.</div>
-        <div class="case-flag warn">⚠ Post-load decline caught before escalation</div>
-      </div>
-      <div class="case-item">
-        <div class="case-week">Tactical Operation · 5 Days</div>
-        <div class="case-num red">D5<span> flag</span></div>
-        <div class="case-desc">Physical output stable across Days 1–4. Declined on Day 5 after sustained operational demand. End-of-block accumulation pattern — identified and addressed before the next cycle began.</div>
-        <div class="case-flag warn">⚠ Accumulation pattern identified and addressed</div>
+        <div class="case-desc">Movement quality improved from baseline to target across five sessions. Soreness spike at Session 2 tracked, managed, and recovered without setback. Progression confirmed through data — not instinct.</div>
+        <div class="case-flag ok">↑ Reconditioning arc confirmed</div>
       </div>
     </div>
   </div>
@@ -363,37 +368,35 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
 <!-- PROBLEM -->
 <section class="prob-bg" id="problem">
   <div class="wrap">
-    <div class="eye reveal">The Gap</div>
-    <div class="disp reveal">Two Environments.<br/><em>One Missing System.</em></div>
+    <div class="eye reveal">The Difference</div>
+    <div class="disp reveal">Training Happens.<br/><em>Development Is Built.</em></div>
     <div class="prob-grid reveal">
       <div class="p-card">
         <div class="p-num">01</div>
-        <div class="p-sector">Athletic Development</div>
-        <h3>Your Best Players Leave. Without a Development Framework, Their Value Leaves With Them.</h3>
-        <p>Athletes are progressing. Schools and academies are investing. But without individual development tracking, physical progression records, and structured reporting — the development arc of every athlete is invisible. No data travels with the player. No framework justifies the investment. No record makes the progression visible to the people it matters to.</p>
-        <div class="p-flag">Development assumed · Progression invisible · Record missing</div>
+        <div class="p-sector">The Athlete</div>
+        <h3>Training Every Week. No System Tracking Whether It's Working.</h3>
+        <p>Athletes commit to the process. Coaches deliver sessions. Parents invest in the pathway. But without physical screening, in-season progression tracking, and structured development reporting — nothing is captured. The work happens and disappears. No arc. No proof. No visibility into what the athlete is actually becoming.</p>
+        <div class="p-flag">Development assumed · Progression invisible · Potential unproven</div>
       </div>
       <div class="p-card">
         <div class="p-num">02</div>
-        <div class="p-sector">High Performance Operations</div>
-        <h3>Your Safety System Covers the Environment. Nobody Is Covering the Person Inside It.</h3>
-        <p>Compliance frameworks govern the environment. Nobody is tracking the person operating in it — their physical readiness, their accumulation patterns, their output state across a demanding block. The gap between compliance and actual human performance readiness is where incidents happen and where capacity is lost.</p>
-        <div class="p-flag">Compliance covers the environment · Not the person</div>
+        <div class="p-sector">The Academy</div>
+        <h3>Every Academy Has Coaching. Few Have the System That Makes It Visible.</h3>
+        <p>The sessions are there. The coaches are there. What most academies are missing is the infrastructure that turns all of it into documented development — physical baselines, progression records, and termly reports that become the standard the academy is known for. That standard is what parents choose. What players stay for. What separates a good academy from a great one.</p>
+        <div class="p-flag">Coaching present · Development standard missing</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DATA -->
+<!-- DATA — dark island -->
 <section class="data-bg" id="data">
   <div class="wrap">
     <div class="eye reveal">Active Case Data</div>
-    <div class="disp reveal">Real Numbers.<br/><em>Real Environments.</em></div>
+    <div class="disp reveal">Real Athletes.<br/><em>Real Progression.</em></div>
     <div class="tabs reveal">
       <button class="tab on" onclick="doTab('athlete',this)">Competitive Athlete</button>
       <button class="tab" onclick="doTab('msk',this)">MSK Reconditioning</button>
-      <button class="tab" onclick="doTab('industrial',this)">Industrial</button>
-      <button class="tab" onclick="doTab('tactical',this)">Tactical</button>
     </div>
     <div class="panel on" id="panel-athlete">
       <div class="p-chart">
@@ -416,8 +419,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
       <div class="p-insight">
         <div class="i-big">+20<span> min</span></div><div class="i-lbl">Game Time Progression</div>
         <div class="i-big">7<span>/10</span></div><div class="i-lbl">Pain Spike — Week 3</div>
-        <div class="fbox"><div class="fl">⚠ Increasing demand on a fatiguing system</div><p>Physical output declining. Pain rising. Game time increasing simultaneously. The pattern a development framework catches — before it becomes a setback.</p></div>
-        <div class="gbox"><div class="gl">✓ Development arc visible through data</div><p>Three weeks. Output, pain, physical load, game time tracked together. This is what an individual development record is built from.</p></div>
+        <div class="fbox"><div class="fl">⚠ Increasing demand on a fatiguing system</div><p>Physical output declining. Pain rising. Game time increasing simultaneously. The pattern a development framework catches before it becomes a setback.</p></div>
+        <div class="gbox"><div class="gl">✓ Development arc visible through data</div><p>Three weeks. Output, pain, load, and game time tracked together. This is what an individual development record is built from.</p></div>
       </div>
     </div>
     <div class="panel" id="panel-msk">
@@ -439,46 +442,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
         </div>
       </div>
       <div class="p-insight">
-        <div class="i-big">+50<span>%</span></div><div class="i-lbl">Movement Quality Gain S1→S5</div>
-        <div class="i-big">2.2<span>/5</span></div><div class="i-lbl">Avg Physical Output — Reconditioning Phase</div>
-        <div class="fbox"><div class="fl">⚠ S2 — Soreness 9/10</div><p>Without a development framework, reconditioning decisions are made on assumption. The individual returns too soon or too loaded.</p></div>
+        <div class="i-big">+50<span>%</span></div><div class="i-lbl">Movement Quality S1→S5</div>
+        <div class="i-big">2.2<span>/5</span></div><div class="i-lbl">Avg Physical Output</div>
+        <div class="fbox"><div class="fl">⚠ S2 — Soreness 9/10</div><p>Without a development framework, reconditioning decisions are made on assumption. The athlete returns too soon or too loaded.</p></div>
         <div class="gbox"><div class="gl">✓ Progression confirmed through data</div><p>Movement quality improved every session. The arc tracked and proven — not assumed.</p></div>
-      </div>
-    </div>
-    <div class="panel" id="panel-industrial">
-      <div class="p-chart">
-        <div class="ct">Physical Output — Industrial Operation · 5 Days</div>
-        <div class="bars">
-          <div class="brow"><div class="bl">D1</div><div class="bt"><div class="bf g" data-w="100"><span class="bv">5.0 — Moderate</span></div></div></div>
-          <div class="brow"><div class="bl">D2</div><div class="bt"><div class="bf" data-w="80"><span class="bv">4.0 — High demand</span></div></div></div>
-          <div class="brow"><div class="bl">D3</div><div class="bt"><div class="bf w" data-w="40"><span class="bv">2.0 ⚠ FLAGGED</span></div></div></div>
-          <div class="brow"><div class="bl">D4</div><div class="bt"><div class="bf g" data-w="100"><span class="bv">5.0 — Recovered</span></div></div></div>
-          <div class="brow"><div class="bl">D5</div><div class="bt"><div class="bf g" data-w="100"><span class="bv">5.0 — Stable</span></div></div></div>
-        </div>
-      </div>
-      <div class="p-insight">
-        <div class="i-big">D3<span> flag</span></div><div class="i-lbl">Post-Demand Decline Detected</div>
-        <div class="i-big">4.2<span>/5</span></div><div class="i-lbl">Avg Physical Output — Full Block</div>
-        <div class="fbox"><div class="fl">⚠ Day 3 — Output dropped to 2/5</div><p>Following a high-demand shift. This pattern untracked becomes a physical incident. Visible on Day 3 — before it becomes a cost.</p></div>
-        <div class="gbox"><div class="gl">✓ Full recovery by Day 4</div><p>Demand adjusted. Output returned to 5/5. The decision window only a development framework creates.</p></div>
-      </div>
-    </div>
-    <div class="panel" id="panel-tactical">
-      <div class="p-chart">
-        <div class="ct">Physical Output — Tactical Operation · 5 Days</div>
-        <div class="bars">
-          <div class="brow"><div class="bl">D1</div><div class="bt"><div class="bf g" data-w="100"><span class="bv">5.0</span></div></div></div>
-          <div class="brow"><div class="bl">D2</div><div class="bt"><div class="bf" data-w="80"><span class="bv">4.0</span></div></div></div>
-          <div class="brow"><div class="bl">D3</div><div class="bt"><div class="bf g" data-w="100"><span class="bv">5.0</span></div></div></div>
-          <div class="brow"><div class="bl">D4</div><div class="bt"><div class="bf" data-w="100"><span class="bv">5.0 — High demand</span></div></div></div>
-          <div class="brow"><div class="bl">D5</div><div class="bt"><div class="bf w" data-w="60"><span class="bv">3.0 ⚠ DECLINE</span></div></div></div>
-        </div>
-      </div>
-      <div class="p-insight">
-        <div class="i-big">D5<span> flag</span></div><div class="i-lbl">End-of-Block Accumulation Identified</div>
-        <div class="i-big">4.4<span>/5</span></div><div class="i-lbl">Avg Physical Output — Full Block</div>
-        <div class="fbox"><div class="fl">⚠ Day 5 — Accumulated physical decline</div><p>Output at 3/5 after four sustained days. The accumulation pattern that precedes incidents — invisible without a framework.</p></div>
-        <div class="gbox"><div class="gl">✓ Same pattern. Every environment.</div><p>Physical output accumulates. The framework flags it. Sport, industrial, tactical — identical pattern, one system.</p></div>
       </div>
     </div>
   </div>
@@ -492,35 +459,35 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
     <div class="svc-grid reveal">
       <div class="svc-card">
         <div class="svc-tier">Tier 01</div>
-        <h3>Readiness Audit</h3>
-        <p class="svc-desc">We map the gaps — development blind spots, physical progression patterns, framework needs. You leave with a 90-day roadmap and a clear picture of what no system is costing.</p>
+        <h3>Development Audit</h3>
+        <p class="svc-desc">Full physical baseline — movement quality, COD profile, strength, and energy system. A clear picture of where the athlete is and what the next development block requires.</p>
         <ul class="svc-list">
-          <li>Physical baseline and gap assessment</li>
-          <li>Development and downtime pattern analysis</li>
-          <li>90-day roadmap and framework report</li>
+          <li>Full physical development screen</li>
+          <li>COD and sprint profile</li>
+          <li>Development priorities and 90-day roadmap</li>
         </ul>
       </div>
       <div class="svc-card feat">
         <div class="svc-tier">Tier 02</div>
-        <h3>Development Infrastructure</h3>
-        <p class="svc-desc">Full implementation — individual development tracking, physical progression records, development load management, and reconditioning protocols. Azure workflow automation integrated.</p>
+        <h3>Academy Development Standard</h3>
+        <p class="svc-desc">The infrastructure that becomes the standard your academy is known for. Physical screening, in-season tracking, and termly development records — built around every player, owned by the academy.</p>
         <ul class="svc-list">
-          <li>Individual development tracking and scoring</li>
-          <li>Physical progression records and reports</li>
-          <li>Development load and physical progression</li>
+          <li>Physical development screening</li>
+          <li>In-season progression tracking</li>
+          <li>Termly development records</li>
           <li>Reconditioning protocols</li>
-          <li>Azure AI workflow automation</li>
+          <li>Automated reporting infrastructure</li>
         </ul>
       </div>
       <div class="svc-card">
         <div class="svc-tier">Tier 03</div>
-        <h3>Season Operations</h3>
-        <p class="svc-desc">Retained operations partner across the full season or contract cycle. Ongoing development tracking, framework updates, decision support.</p>
+        <h3>Season Partnership</h3>
+        <p class="svc-desc">Retained development partner across the full season. Ongoing tracking, development record updates, and quarterly physical baseline audits.</p>
         <ul class="svc-list">
-          <li>Monthly development review and reporting</li>
-          <li>Termly individual development records</li>
+          <li>Monthly development review</li>
+          <li>Termly development records</li>
           <li>Quarterly physical baseline audits</li>
-          <li>Season-on-season renewal structure</li>
+          <li>Season-on-season renewal</li>
         </ul>
       </div>
     </div>
@@ -531,27 +498,26 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
 <section class="about-bg" id="about">
   <div class="wrap">
     <div class="eye reveal">The Practitioner</div>
-    <div class="disp reveal">The Infrastructure<br/><em>Most Didn't Know Was Possible.</em></div>
+    <div class="disp reveal">Built in the Field.<br/><em>Proven on the Pitch.</em></div>
     <div class="about-layout reveal">
       <div>
         <div class="photo-frame">
           <div class="pc tl"></div><div class="pc tr"></div>
           <div class="pc bl"></div><div class="pc br"></div>
-          <div class="photo-lbl">Photo<br/>Coming Soon</div>
+          <div class="photo-lbl">In Session</div>
+          <div class="photo-sub">Photo Coming Soon</div>
         </div>
       </div>
       <div>
-        <p class="about-intro">Where physical development science meets operational systems — built and tested across sport, industrial, and tactical environments simultaneously.</p>
-        <p class="about-body">Most environments have access to either a performance specialist or a systems engineer. Very few have someone who operates as both — designing the development framework and building the automation infrastructure that makes it run. Physical development protocols drawn from elite sport. Workflow infrastructure built with enterprise-grade AI. All tested in the field. Not a consultant who visits quarterly — a function the organisation did not previously have and will not want to operate without.</p>
+        <p class="about-intro">Where physical development science meets performance systems — built and tested across sport simultaneously.</p>
+        <p class="about-body">Most athletes have access to either a performance coach or a sports scientist. Very few have someone who combines FIFA-certified football medicine knowledge, EXOS performance methodology, and Azure AI engineering to build the development infrastructure that makes athletic progression visible, documentable, and transferable. Active athlete. Built in the field. The system works because it was tested there first.</p>
         <div class="cred-stack">
-          <div class="cred-row"><span class="cred-name">FIFA Medical Diploma</span><span class="cred-sub"></span></div>
-          <div class="cred-row"><span class="cred-name">EXOS Performance Specialisation</span><span class="cred-sub">Tactical Training Systems</span></div>
-          <div class="cred-row"><span class="cred-name">Microsoft Azure AI Engineer</span><span class="cred-sub">Certified</span></div>
-          <div class="cred-row"><span class="cred-name">Azure AI in Healthcare</span><span class="cred-sub">Certified</span></div>
-          <div class="cred-row"><span class="cred-name">Individual Player Development Analysis</span><span class="cred-sub"></span></div>
-          <div class="cred-row"><span class="cred-name">Clinical Workflows, Automations &amp; Integrations</span><span class="cred-sub"></span></div>
-          <div class="cred-row"><span class="cred-name">Data Management, Security &amp; Compliance</span><span class="cred-sub"></span></div>
+          <div class="cred-row"><span class="cred-name">FIFA Diploma in Football Medicine</span><span class="cred-sub">FIFA · 2026</span></div>
+          <div class="cred-row"><span class="cred-name">EXOS Performance Specialisation</span><span class="cred-sub">Phase 1 &amp; 2 Mentorship · XPS</span></div>
+          <div class="cred-row"><span class="cred-name">Microsoft Azure AI Engineer</span><span class="cred-sub">Certified · AI-102</span></div>
+          <div class="cred-row"><span class="cred-name">Power BI Data Analyst</span><span class="cred-sub">PL-300</span></div>
           <div class="cred-row"><span class="cred-name">Active Athlete</span><span class="cred-sub">Competitive Level</span></div>
+          <div class="cred-row"><span class="cred-name">REPs UAE</span><span class="cred-sub">Registered Practitioner</span></div>
         </div>
       </div>
     </div>
@@ -563,11 +529,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
   <div class="cta-glow"></div>
   <div class="cta-inner">
     <div class="cta-eye reveal">Start Here</div>
-    <h2 class="cta-h reveal">Book a Readiness Audit.<br/><em>See What You Can't Currently See.</em></h2>
-    <p class="cta-sub reveal">30 minutes. No commitment. We find the gaps and show you what a development framework changes.</p>
+    <h2 class="cta-h reveal">Book a Development Audit.<br/><em>See Where the Athlete Actually Is.</em></h2>
+    <p class="cta-sub reveal">One session. Full physical baseline. A clear picture of what the next development block looks like.</p>
     <div class="cta-acts reveal">
-      <a href="mailto:contact@humanperformanceoperations.com" class="btn-g">Book Your Audit →</a>
-      <a href="#data" class="btn-o">View Case Data</a>
+      <a href="mailto:contact@humanperformanceoperations.com" class="cta-btn-g">Book Your Audit →</a>
+      <a href="#data" class="cta-btn-o">View Case Data</a>
     </div>
   </div>
 </section>
@@ -575,8 +541,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
 <footer>
   <div class="f-logo"><div class="f-dot"></div>Human Performance Operations</div>
   <div class="f-links">
-    <a href="#problem">The Gap</a>
-    <a href="#data">Data</a>
+    <a href="#problem">The Difference</a>
+    <a href="#data">Case Data</a>
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="hpo-cod-tool.html">COD Tool</a>
@@ -589,22 +555,22 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:32px
 </footer>
 
 <script>
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.5)'});
-  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)'});
-});
 const obs=new IntersectionObserver(es=>es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*60)}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 function fillBars(c){c.querySelectorAll('.bf[data-w]').forEach(b=>b.style.width=b.dataset.w+'%')}
 setTimeout(()=>fillBars(document.body),700);
 new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.sig-fill[data-w]').forEach(b=>b.style.width=b.dataset.w+'%')}),{threshold:.3}).observe(document.querySelector('.hero-signal')||document.body);
+function doTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  const p=document.getElementById('panel-'+id);
+  p.classList.add('on');
+  p.querySelectorAll('.bf[data-w]').forEach(b=>b.style.width='0');
+  setTimeout(()=>fillBars(p),50);
+}
 function toggleMenu(){
   const m=document.getElementById('mobileMenu');
-  const h=document.getElementById('hamburger');
   m.classList.toggle('open');
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
@@ -618,15 +584,6 @@ function toggleSub(id,label){
   document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
   document.querySelectorAll('.mobile-section-label').forEach(l=>l.classList.remove('open'));
   if(!isOpen){sub.classList.add('open');label.classList.add('open')}
-}
-function doTab(id,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  btn.classList.add('on');
-  const p=document.getElementById('panel-'+id);
-  p.classList.add('on');
-  p.querySelectorAll('.bf[data-w]').forEach(b=>b.style.width='0');
-  setTimeout(()=>fillBars(p),50);
 }
 </script>
 </body>
